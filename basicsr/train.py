@@ -81,8 +81,19 @@ def init_loggers(opt):
 def create_train_val_dataloader(opt, logger):
     # create train and val dataloaders
     train_loader, val_loader = None, None
+    # print('\n\n\n ******** \n\n\n')
+    # print(opt['datasets'])
+    # print('\n\n\n ******** \n\n\n')
+    # print(opt['datasets'].items())
+    # print('\n\n\n ******** \n\n\n')
+    # for phase, dataset_opt in opt['datasets'].items():
+    #     print(phase)
+    # exit()
     for phase, dataset_opt in opt['datasets'].items():
         if phase == 'train':
+            print('\n\n  ++++++++++ \n')
+            print(dataset_opt)
+            print('\n\n  ++++++++++ \n')
             dataset_enlarge_ratio = dataset_opt.get('dataset_enlarge_ratio', 1)
             train_set = create_dataset(dataset_opt)
             train_sampler = EnlargedSampler(train_set, opt['world_size'],

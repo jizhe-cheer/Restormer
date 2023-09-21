@@ -35,14 +35,30 @@ def create_dataset(dataset_opt):
             type (str): Dataset type.
     """
     dataset_type = dataset_opt['type']
+    print("dataset_opt['type']:", dataset_opt['type'])  # Dataset_GaussianDenoising
+    # exit()
 
     # dynamic instantiation
+    print('_dataset_modules:', _dataset_modules)
+    # [
+    # <module 'basicsr.data.ffhq_dataset' from '/host/Codes/DigestRestormer/basicsr/data/ffhq_dataset.py'>,
+    # <module 'basicsr.data.paired_image_dataset' from '/host/Codes/DigestRestormer/basicsr/data/paired_image_dataset.py'>,
+    # <module 'basicsr.data.reds_dataset' from '/host/Codes/DigestRestormer/basicsr/data/reds_dataset.py'>,
+    # <module 'basicsr.data.single_image_dataset' from '/host/Codes/DigestRestormer/basicsr/data/single_image_dataset.py'>,
+    # <module 'basicsr.data.video_test_dataset' from '/host/Codes/DigestRestormer/basicsr/data/video_test_dataset.py'>,
+    # <module 'basicsr.data.vimeo90k_dataset' from '/host/Codes/DigestRestormer/basicsr/data/vimeo90k_dataset.py'>
+    # ]
+
     for module in _dataset_modules:
         dataset_cls = getattr(module, dataset_type, None)
         if dataset_cls is not None:
+            print('module:', module)  # <module 'basicsr.data.paired_image_dataset' from '/host/Codes/DigestRestormer/basicsr/data/paired_image_dataset.py'>
             break
     if dataset_cls is None:
         raise ValueError(f'Dataset {dataset_type} is not found.')
+
+    print('dataset_cls:', dataset_cls)  # <class 'basicsr.data.paired_image_dataset.Dataset_GaussianDenoising'>
+    exit()
 
     dataset = dataset_cls(dataset_opt)
 
