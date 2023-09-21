@@ -58,7 +58,7 @@ def create_dataset(dataset_opt):
         raise ValueError(f'Dataset {dataset_type} is not found.')
 
     print('dataset_cls:', dataset_cls)  # <class 'basicsr.data.paired_image_dataset.Dataset_GaussianDenoising'>
-    exit()
+    # exit()
 
     dataset = dataset_cls(dataset_opt)
 
@@ -132,6 +132,9 @@ def create_dataloader(dataset,
     else:
         # prefetch_mode=None: Normal dataloader
         # prefetch_mode='cuda': dataloader for CUDAPrefetcher
+        # print('\n\n ------ Digest: seed for DataLoader \n')
+        # print(dataloader_args)
+        # exit()
         return torch.utils.data.DataLoader(**dataloader_args)
 
 
